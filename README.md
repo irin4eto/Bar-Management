@@ -1,3 +1,4 @@
+==============
 BAR MANAGEMENT
 
 Application , combined with Django, serving restaurant type bar .
