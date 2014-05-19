@@ -10,4 +10,3 @@ It will have the following features :
 type items , back orders , etc.
 
 Users can access the system through the login panel. Based on user role will have the following rights: Waiters - straight from point 3 Bartenders - straight from point 4 Managers - all rights.
-==============
