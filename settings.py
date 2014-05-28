@@ -53,8 +53,17 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'south',
+
+    'users',
+    'website',
+
 )
+
+TEMPLATE_DIRS = os.path.join(os.path.dirname(__file__),
+                             '~/Desktop/bar/env/lib/python3.2/site-packages/' +
+                             'django/templates').replace('\\', '/')
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -65,11 +74,18 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.contrib.messages.context_processors.messages",
+)
+
 ROOT_URLCONF = 'bar_management.urls'
 
 WSGI_APPLICATION = 'bar_management.wsgi.application'
-
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
@@ -83,6 +99,17 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+LOGIN_URL = 'users:login_form'
+
+STATIC_URL = '/static/'
+STATIC_ROOT = 'static'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+MEDIA_URL = '/media/'
+
+DEBUG = True
+
 
 
 # Static files (CSS, JavaScript, Images)

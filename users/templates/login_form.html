@@ -1,0 +1,47 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href='{{ STATIC_URL }}users/style.css'/>
+
+{% block meta %}
+    <title>Login for users</title>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="large-7 columns">
+        <form method="post" action="">
+            {% csrf_token %}
+            <fieldset>
+                {% if form.errors %}
+                    <div class="alert alert-danger" internalError>
+                        <div data-alert class="alert-box">
+                            <strong>Грешка! </strong>
+                            Грешна парола или потребителско име.
+                            <a href="#" class="close">&times;</a>
+                        </div>
+                    </div>
+                {% endif %}
+                <legend>Вход за курсисти</legend>
+                <div class="row">
+                    <div class="large-12 columns">
+                        <label>Email
+                            <input type="email" name="username" class="error" />
+                        </label>
+                        {# <small class="error">Invalid entry</small> #}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-12 columns">
+                        <label>Парола
+                            <input type="password" name="password" class="error" />
+                        </label>
+                        {# <small class="error">Invalid entry</small> #}
+                    </div>
+                </div>
+                <p></p>
+                <button>Вход</button>
+            </fildset>
+        </form>
+    </div>
+</div>
+{% endblock %}
