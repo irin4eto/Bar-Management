@@ -1,0 +1,30 @@
+p.pos_fixed
+{
+position:fixed;
+top:520px;
+right:650px;
+}
+
+h1 {
+font-size:60px;
+color:orange;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background-color: darken(#428bca, 20%) !important;
+}
+
+.btn {
+  position:
+     fixed;
+     top:520px;
+     right:650px;
+  border: 100 !important;
+  &:focus { outline: 0; }
+  &:hover { top: 2px; }
+  &:active { top: 6px; }
+  cursor: pointer;
+}
+

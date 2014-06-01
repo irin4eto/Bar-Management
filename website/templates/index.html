@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+
+<html>
+<head>
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}"
+        rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/index.css" />
+    <style>
+        body
+        {
+           background-image:url("{{STATIC_URL}}/img/Yellow Bird-jpg.png"),
+              url("{{STATIC_URL }}/img/coctail2-jpg.png");
+           background-repeat:no-repeat;
+           background-position:right top, left;
+           margin-right:200px;
+         }
+    </style>
+</head>
+
+
+<body>
+    <div class="large-12 columns text-center">
+        <div class="text-center">
+            <div class="container" style="margin: 140px;">
+                <div class="text-center">
+                    <h1 class = "text-center">Управление на</h1>
+                    <img src="{{STATIC_URL }}/img/LimeBar-jpg.png"
+                        alt="Lime Bar" style = "padding-top: 40px;">
+                    <a href="{{ 'login' }}">
+                        <button type="button" name="entrance"
+                            class="btn btn-success btn-lg">
+                                <h4>Вход в бара</h4></button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
