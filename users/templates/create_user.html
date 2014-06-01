@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html>
+    <head>
+        <title>New Registration</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="{% static 'bootstrap/css/bootstrap.min.css' %}"
+        rel="stylesheet" media="screen">
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/create_user.css"/>
+        <style>
+
+        body {
+          font-family: 'Montserrat', sans-serif;
+          background-image:url("{{ STATIC_URL }}/img/rsz_summer-coctail-jpg.png");
+          background-repeat:no-repeat;
+          background-position:right top;
+          margin-right:-200px;
+         }
+
+           .btn{
+              position:
+              fixed;
+              top:495px;
+              left:80px;
+           }
+        </style>
+    </head>
+
+    <body>
+        <h5>
+            <div class="container" style="margin: 30px;">
+            <h1>Нов потребител</h1>
+            <form id="user_form" method="post" action="/manager/"
+                enctype="multipart/form-data">
+                <h3>{% csrf_token %}
+                {{user_form.as_p}}
+                {{ profile_form.as_p}}
+                </h3>
+                <a href="{{ 'login' }}">
+                    <h4><input class="btn btn-warning" type="submit"
+                        name="submit" value="Създай потребител"/></h4>
+                </a>
+            </form>
+            </div>
+        </h5>
+    </body>
+</html>

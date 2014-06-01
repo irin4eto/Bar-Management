@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import BaseUserManager
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
+from users.fields import PasswordField
+from django import forms
 # Create your models here.
 
 
@@ -29,8 +31,13 @@ class UserManager(BaseUserManager):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
-    email = models.CharField(blank=False, max_length=30)
-    role = models.CharField(blank=False, max_length=9)
+    user.add_fieldsets = (
+        (None, {
+            'fields': ('password1', 'password2')}
+         ),
+    )
+    email = models.EmailField(blank=False, max_length=30)
+    role = models.CharField(blank=False, max_length=10)
     first_name = models.CharField(blank=False, max_length=30)
     last_name = models.CharField(blank=False, max_length=30)
 

@@ -1,0 +1,35 @@
+.btn-success{
+  position:
+     fixed;
+     top:210px;
+     right:280px;
+  border: 100 !important;
+  &:focus { outline: 0; }
+  &:hover { top: 2px; }
+  &:active { top: 6px; }
+  cursor: pointer;
+}
+
+.btn-info  {
+  position:
+     fixed;
+     top:390px;
+     right:400px;
+  border: 100 !important;
+  &:focus { outline: 0; }
+  &:hover { top: 2px; }
+  &:active { top: 6px; }
+  cursor: pointer;
+}
+
+.btn-warning  {
+  position:
+     fixed;
+     top:390px;
+     right:160px;
+  border: 100 !important;
+  &:focus { outline: 0; }
+  &:hover { top: 2px; }
+  &:active { top: 6px; }
+  cursor: pointer;
+}

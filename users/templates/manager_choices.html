@@ -1,7 +1,44 @@
 
+<!DOCTYPE html>
 
-       <input type="submit" name="create"
-         id="create" value="Create user"
-         class="button_active"/>
+{% load staticfiles %}
+
+<html>
+<head>
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}"
+        rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/manager_choice.css" />
+    <style>
+        body {
+          font-family: 'Montserrat', sans-serif;
+          background-image:url("{{ STATIC_URL }}/img/rsz_7coctail-beach-jpg.png");
+          background-repeat:no-repeat;
+          background-position:right top right;
+          margin-right:-200px;
+         }
+    </style>
+</head>
+
+<body>
+
+        <a href="createUser">
+            <button type="button" name="entrance"
+                class="btn btn-success btn-lg">
+                <h4>Създай потребител</h4>
+            </button>
+        </a>
+           <button type="button" name="entrance"
+               class="btn btn-info btn-lg">
+               <h4>Провери оборот</h4>
+           </button>
+           <button type="button" name="entrance"
+               class="btn btn-warning btn-lg">
+               <h4>Провери продажби</h4>
+           </button>
+
+</body>
+</html>
+
+
 
 

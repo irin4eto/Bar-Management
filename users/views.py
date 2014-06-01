@@ -1,10 +1,11 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth import views
-from django.contrib.auth import authenticate, login as auth_login
+from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 from django.template import RequestContext
 from django.shortcuts import render_to_response
-
+from users.forms import UserForm, UserProfileForm
+from users.models import UserProfile
 # Create your views here.
 
 
@@ -19,7 +20,7 @@ def user_login(request):
 
         if user:
             if user.is_active:
-                auth_login(request, user)
+                login(request, user)
                 return HttpResponseRedirect('/%s/' % (user.role.lower()))
             else:
 
@@ -41,6 +42,37 @@ def manager(request):
 
 
 def create_user(request):
-    return render(request, "create_user.html", locals())
+    context = RequestContext(request)
+
+    registered = False
+
+    if request.method == 'POST':
+        user_form = UserForm(data=request.POST)
+        profile_form = UserProfileForm(data=request.POST)
+
+        if profile_form.is_valid():
+            user = user_form.save()
+
+            user.set_password(user.password)
+            user.save()
+
+            profile = profile_form.save(commit=False)
+            profile.user = user
+
+            profile.save()
+            registered = True
+
+        else:
+            print(user_form.errors, profile_form.errors)
+    else:
+        user_form = UserForm()
+        profile_form = UserProfileForm()
+
+    return render_to_response('create_user.html',
+                              {'user_form': user_form,
+                               'profile_form': profile_form,
+                               'registered': registered},
+                              context)
+
 
 

@@ -1,47 +1,65 @@
-{% load static %}
+<!DOCTYPE html>
 
-<link rel="stylesheet" type="text/css" href='{{ STATIC_URL }}users/style.css'/>
+{% load staticfiles %}
 
-{% block meta %}
-    <title>Login for users</title>
-{% endblock %}
+<html>
+<head>
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}"
+        rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/login_form.css" />
+    <style>
+        body {
+          font-family: 'Montserrat', sans-serif;
+          background-image:url("{{ STATIC_URL }}/img/rsz_coctail-background-jpg.png");
+          background-repeat:no-repeat;
+          background-position:right top;
+          margin-right:-200px;
+         }
+    </style>
+</head>
 
-{% block content %}
-<div class="row">
-    <div class="large-7 columns">
-        <form method="post" action="">
-            {% csrf_token %}
-            <fieldset>
-                {% if form.errors %}
-                    <div class="alert alert-danger" internalError>
-                        <div data-alert class="alert-box">
-                            <strong>Грешка! </strong>
-                            Грешна парола или потребителско име.
-                            <a href="#" class="close">&times;</a>
+<body>
+    <h2>
+        <div class="row">
+            <div class="large-7 columns">
+                <form method="post" action="">
+                    {% csrf_token %}
+                    <fieldset>
+                    {% if form.errors %}
+                        <div class="alert alert-danger" internalError>
+                            <div data-alert class="alert-box">
+                                 <strong>Грешка! </strong>
+                                 Грешна парола или потребителско име.
+                                 <a href="#" class="close">&times;</a>
+                           </div>
+                       </div>
+                    {% endif %}
+                    <legend><h1>Вход зa потребители</h1></legend>
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <label><h1>Email</h1>
+                                <input type="email" name="username"
+                                    class="error" />
+                            </label>
+                            {# <small class="error">Invalid entry</small> #}
                         </div>
-                    </div>
-                {% endif %}
-                <legend>Вход за курсисти</legend>
-                <div class="row">
-                    <div class="large-12 columns">
-                        <label>Email
-                            <input type="email" name="username" class="error" />
-                        </label>
-                        {# <small class="error">Invalid entry</small> #}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="large-12 columns">
-                        <label>Парола
-                            <input type="password" name="password" class="error" />
-                        </label>
-                        {# <small class="error">Invalid entry</small> #}
-                    </div>
-                </div>
-                <p></p>
-                <button>Вход</button>
-            </fildset>
-        </form>
-    </div>
-</div>
-{% endblock %}
+                   </div>
+                   <div class="row">
+                       <div class="large-12 columns">
+                           <label><h1>Парола</h1>
+                               <input type="password" name="password"
+                                   class="error" />
+                           </label>
+                           {# <small class="error">Invalid entry</small> #}
+                      </div>
+                   </div>
+                   <button type="button" name="entrance"
+                       class="btn btn-success btn-lg">
+                           <h4>Вход в бара</h4></button>
+                   </fieldset>
+               </form>
+            </div>
+        </div>
+    </h2>
+</body>
+</html>
