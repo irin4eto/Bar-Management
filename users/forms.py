@@ -21,12 +21,12 @@ class UserForm(forms.ModelForm):
             raise forms.ValidationError("Passwords don't match")
         return password2"""
 
-    """def save(self, commit=True):
+    def save(self, commit=True):
         user = super(UserForm, self).save(commit=False)
         user.set_password(self.cleaned_data["password"])
         if commit:
             user.save()
-        return user"""
+        return user
 
 
 """class UserChangeForm(forms.ModelForm):
