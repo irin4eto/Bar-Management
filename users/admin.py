@@ -7,14 +7,9 @@ from users.models import UserProfile
 class UsersAdmin(admin.ModelAdmin):
     list_display = [
         'id',
-        'email',
         'role',
         'first_name',
-        'last_name',
+        'last_name'
     ]
-
-    search_fields = ('role',)
-    ordering = ('role',)
-    filter_horizontal = ()
 
 admin.site.register(UserProfile, UsersAdmin)

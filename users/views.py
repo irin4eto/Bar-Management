@@ -1,37 +1,40 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth import views
 from django.contrib.auth import authenticate, login
+from django.views.decorators.csrf import csrf_protect
 from django.http import HttpResponseRedirect, HttpResponse
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from users.forms import UserForm, UserProfileForm
 from users.models import UserProfile
+from users.forms import LoginForm
+from users.models import create_user_profile
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
 # Create your views here.
 
 
 def user_login(request):
-    context = RequestContext(request)
-
     if request.method == 'POST':
-        email = request.POST.get('email', False)
-        password = request.POST.get('password', False)
-
-        user = authenticate(email=email, password=password)
-
-        if user:
-            if user.is_active:
-                login(request, user)
-                return HttpResponseRedirect('/%s/' % (user.role.lower()))
+        form = LoginForm(data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(username=form.cleaned_data['username'],
+                                password=form.cleaned_data['password'])
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                else:
+                    print("The username or password were incorrect.")
             else:
-
-                return HttpResponse("Your account is disabled.")
-        else:
-
-            print("Invalid login details: {0}, {1}".format(email, password))
-            return HttpResponse("Invalid login details supplied.")
-
+                print("The username or password were incorrect.")
+            return HttpResponseRedirect('/home/')
     else:
-        return render_to_response('login_form.html', {}, context)
+        form = LoginForm(data=request.POST)
+    variables = RequestContext(request, {'form': form})
+
+    return render_to_response('login_form.html', variables,)
 
 
 def manager(request):
@@ -40,39 +43,40 @@ def manager(request):
             return redirect('create_user')
     return render(request, "manager_choices.html", locals())
 
-
+@csrf_protect
 def create_user(request):
-    context = RequestContext(request)
-
-    registered = False
-
     if request.method == 'POST':
-        user_form = UserForm(data=request.POST)
-        profile_form = UserProfileForm(data=request.POST)
+        uform = UserForm(data=request.POST)
+        pform = UserProfileForm(data=request.POST)
 
-        if profile_form.is_valid():
-            user = user_form.save()
+        if uform.is_valid() and pform.is_valid():
+            new_user = User.objects.create_user(
+                username=uform.cleaned_data['username'],
+                email=uform.cleaned_data['email'],
+                password=uform.cleaned_data['password1'],
+                first_name=uform.cleaned_data['first_name'],
+                last_name=uform.cleaned_data['last_name'])
+            user_profile = UserProfile(
+                user=new_user,
+                role=pform.cleaned_data['role']
+                )
+            """role=uform.cleaned_data['role'],
+            first_name=uform.cleaned_data['first_name'],
+            last_name=uform.cleaned_data['last_name'])"""
+            user_profile.save()
+            return HttpResponseRedirect('/manager/')
 
-            user.set_password(user.password)
-            user.save()
-
-            profile = profile_form.save(commit=False)
-            profile.user = user
-
-            profile.save()
-            registered = True
-
-        else:
-            print(user_form.errors, profile_form.errors)
     else:
-        user_form = UserForm()
-        profile_form = UserProfileForm()
+        uform = UserForm(data=request.POST)
+        pform = UserForm(data=request.POST)
+    variables = RequestContext(request, {
+        'uform': uform,
+        'pform': pform
+    })
 
     return render_to_response('create_user.html',
-                              {'user_form': user_form,
-                               'profile_form': profile_form,
-                               'registered': registered},
-                              context)
+
+                              variables)
 
 
 

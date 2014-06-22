@@ -32,18 +32,55 @@
         <h5>
             <div class="container" style="margin: 30px;">
             <h1>Нов потребител</h1>
-            <form id="user_form" method="post" action="/manager/"
+            <form id="user_form" method="post" action="/createUser/"
                 enctype="multipart/form-data">
                 <h3>{% csrf_token %}
-                {{user_form.as_p}}
-                {{ profile_form.as_p}}
+                {{ form.non_field_errors }}
+    <div class="fieldWrapper">
+        <label for="id_email">Email:</label>
+        {{ uform.email }}
+
+    </div>
+    <div class="fieldWrapper">
+        <label for="id_username">Username:</label>
+        {{ uform.username }}
+    </div>
+
+    <div class="fieldWrapper">
+        {{ form.password1.errors }}
+        <label for="id_username" >Password:</label>
+        {{ uform.password1 }}
+    </div>
+
+    <div class="fieldWrapper">
+        {{ form.password2.errors }}
+        <label for="id_username" >Confirm password:</label>
+        {{ uform.password2 }}
+    </div>
+
+    <div class="fieldWrapper">
+        {{ form.role.errors }}
+        <label for="id_role" >Role:</label>
+        {{ pform.role }}
+    </div>
+
+    <div class="fieldWrapper">
+        {{ form.sender.errors }}
+        <label for="id_first_name">First name:</label>
+        {{ uform.first_name }}
+    </div>
+
+    <div class="fieldWrapper">
+        <label for="id_last_name">Last name:</label>
+       {{ uform.last_name }}
+    </div>
                 </h3>
-                <a href="{{ 'login' }}">
+
                     <h4><input class="btn btn-warning" type="submit"
                         name="submit" value="Създай потребител"/></h4>
-                </a>
+
             </form>
-            </div>
+        </div>
         </h5>
     </body>
 </html>

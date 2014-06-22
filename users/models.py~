@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import BaseUserManager
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
+from users.fields import PasswordField
 from django import forms
 # Create your models here.
 
@@ -9,7 +10,7 @@ from django import forms
 class UserManager(BaseUserManager):
     STAFF = ('MANAGER', 'WAITER', 'BARTENDER')
 
-    """def create_user(self, role, email, password=None):
+    def create_user(self, role, email, password=None):
         if not email:
             raise ValueError('Users must have an email address')
         if not role in UserManager.STAFF:
@@ -19,7 +20,7 @@ class UserManager(BaseUserManager):
             role=role, email=UserManager.normalize_email(email))
         user.set_password(password)
         user.save(using=self._db)
-        return user"""
+        return user
 
     def create_superuser(self, role, email, password):
             user = self.create_user(email, password=password, role=role)
@@ -29,25 +30,16 @@ class UserManager(BaseUserManager):
 
 
 class UserProfile(models.Model):
-    user = models.ForeignKey(User, unique=True)
-
-    ROLE = (
-        ('M', 'MANAGER'),
-        ('W', 'WAITER'),
-        ('B', 'BARTENDER')
+    user = models.OneToOneField(User)
+    user.add_fieldsets = (
+        (None, {
+            'fields': ('password1', 'password2')}
+         ),
     )
-    role = models.CharField(choices=ROLE, max_length=9)
-    objects = UserManager()
-
-
-    def save(self, *args, **kwargs):
-        try:
-            existing = UserProfile.objects.get(user=self.user)
-            self.id = existing.id #force update instead of insert
-        except UserProfile.DoesNotExist:
-            pass
-        models.Model.save(self, *args, **kwargs)
-
+    email = models.EmailField(blank=False, max_length=30)
+    role = models.CharField(blank=False, max_length=10)
+    first_name = models.CharField(blank=False, max_length=30)
+    last_name = models.CharField(blank=False, max_length=30)
 
     def __unicode__(self):
         return self.user.username
@@ -57,7 +49,7 @@ def create_user_profile(sender, instance, created, **kwargs):
     if created:
         UserProfile.objects.create(user=instance)
 
-"""post_save.connect(create_user_profile, sender=User)"""
+post_save.connect(create_user_profile, sender=User)
 
 
 
