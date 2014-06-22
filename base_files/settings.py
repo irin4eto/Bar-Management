@@ -42,7 +42,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'OPTIONS': {
-            'timeout': 40,
+            'timeout': 60,
         }
     }
 }
@@ -92,6 +92,8 @@ ROOT_URLCONF = 'bar_management.urls'
 
 WSGI_APPLICATION = 'bar_management.wsgi.application'
 
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
@@ -112,7 +114,7 @@ STATIC_ROOT = 'static'
 STATICFILES_DIRS = (
     os.path.join(
         os.path.dirname(__file__),
-        '~/Desktop/bar/bar_management/',
+        '~/Desktop/bar/bar_management/website/',
     ),
 )
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
