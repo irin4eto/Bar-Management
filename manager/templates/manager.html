@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+
+{% load staticfiles %}
+
+<html>
+<head>
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}"
+        rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/manager_choice.css" />
+    <style>
+        body {
+          font-family: 'Montserrat', sans-serif;
+          background-image:url("{{ STATIC_URL }}/img/rsz_7coctail-beach-jpg.png");
+          background-repeat:no-repeat;
+          background-position:right top right;
+          margin-right:-200px;
+         }
+    </style>
+</head>
+
+<body>
+
+        <form id="user_form" method="post" action="/createUser/">
+        {% csrf_token %}
+        <input type="submit" name="create_user"
+                           class="btn btn-success btn-lg" value="Create user"
+                           style="width:110px;height:60px;
+                           margin-left:900px; margin-top:0px"/>
+        </form>
+
+        <form id="user_form" method="post" action="/checkSales/">
+        {% csrf_token %}
+        <input type="submit" name="check_sales"
+                           class="btn btn-warning btn-lg" value="Check sales"
+                           style="width:110px;height:60px;
+                           margin-left:970px; margin-top:0px"/>
+        </form>
+
+
+</body>
+</html>
+
+
+
+

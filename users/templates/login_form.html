@@ -24,28 +24,38 @@
             <div class="large-7 columns">
                 <form action="/login/" method="post">
                 {% csrf_token %}
-                    <legend><h1>Вход зa потребители</h1></legend>
+                    <legend><h1>Login for users</h1></legend>
                     <div class="row">
                         <div class="large-12 columns">
-                            <label><h1>Email</h1>
-                                <input type="email" name="username"
-                                    class="error" />
-                            </label>
+                            <div class="fieldWrapper">
+                                <label><h1>Username:</h1></label>
+                                {{ form.username }}
+                            </div>
                             {# <small class="error">Invalid entry</small> #}
                         </div>
                    </div>
                    <div class="row">
-                       <div class="large-12 columns">
-                           <label><h1>Парола</h1>
-                               <input type="password" name="password"
-                                   class="error" />
-                           </label>
-                           {# <small class="error">Invalid entry</small> #}
-                      </div>
+                        <div class="large-12 columns">
+                            <div class="fieldWrapper">
+                                <label><h1>Email:</h1></label>
+                                {{ form.email }}
+                            </div>
+                            {# <small class="error">Invalid entry</small> #}
+                        </div>
                    </div>
-                   <button type="button" name="entrance"
-                       class="btn btn-success btn-lg">
-                           <h4>Вход в бара</h4></button>
+                   <div class="row">
+                        <div class="large-12 columns">
+                            <div class="fieldWrapper">
+                                <label><h1>Password:</h1></label>
+                                {{ form.password }}
+                            </div>
+                            {# <small class="error">Invalid entry</small> #}
+                        </div>
+                   </div>
+                   <h4>
+                       <input type="submit" name="submit"
+                           class="btn btn-success btn-lg" value="Login in the bar"/>
+                   </h4>
                    </fieldset>
                </form>
             </div>

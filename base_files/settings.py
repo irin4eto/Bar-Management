@@ -60,9 +60,13 @@ INSTALLED_APPS = (
     'html5',
 
     'south',
+    'rest_framework'
 
     'users',
     'website',
+    'manager',
+    'waiter',
+    'bartender',
 
 )
 
@@ -92,7 +96,21 @@ ROOT_URLCONF = 'bar_management.urls'
 
 WSGI_APPLICATION = 'bar_management.wsgi.application'
 
+REST_FRAMEWORK = {
+    # Use hyperlinked styles by default.
+    # Only used if the `serializer_class` attribute is not set on a view.
+    'DEFAULT_MODEL_SERIALIZER_CLASS':
+         'rest_framework.serializers.HyperlinkedModelSerializer',
 
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.DjangoModelPermissions'
+    ]
+}
+
+CMS_PERMISSION = True
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/

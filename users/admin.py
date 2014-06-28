@@ -8,8 +8,7 @@ class UsersAdmin(admin.ModelAdmin):
     list_display = [
         'id',
         'role',
-        'first_name',
-        'last_name'
+        'user'
     ]
 
 admin.site.register(UserProfile, UsersAdmin)

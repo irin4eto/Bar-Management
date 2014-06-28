@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html>
+    <head>
+        <title>New Registration</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="{% static 'bootstrap/css/bootstrap.min.css' %}"
+        rel="stylesheet" media="screen">
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/create_user.css"/>
+        <style>
+
+        body {
+          font-family: 'Montserrat', sans-serif;
+          background-image:url("{{ STATIC_URL }}/img/rsz_summer-coctail-jpg.png");
+          background-repeat:no-repeat;
+          background-position:right top;
+          margin-right:-200px;
+         }
+
+           .btn{
+              position:
+              fixed;
+              top:567px;
+              left:81px;
+           }
+        </style>
+    </head>
+
+    <body>
+        <h5>
+            <div class="container" style="margin: 30px;">
+            <h1>Нов потребител</h1>
+            <form id="user_form" method="post" action="/createUser/"
+                enctype="multipart/form-data">
+                <h3>{% csrf_token %}
+                {{ form.non_field_errors }}
+    <div class="fieldWrapper">
+        <label for="id_email">Email:</label>
+        {{ uform.email }}
+
+    </div>
+    <div class="fieldWrapper">
+        <label for="id_username">Потребителско име:</label>
+        {{ uform.username }}
+    </div>
+
+    <div class="fieldWrapper">
+        {{ form.password1.errors }}
+        <label for="id_username" >Парола</label>
+        {{ uform.password1 }}
+    </div>
+
+    <div class="fieldWrapper">
+        {{ form.password2.errors }}
+        <label for="id_username" >Повтори парола:</label>
+        {{ uform.password2 }}
+    </div>
+
+    <div class="fieldWrapper">
+        {{ form.role.errors }}
+        <label for="id_role" >Длъжност:</label>
+        {{ pform.role }}
+    </div>
+
+    <div class="fieldWrapper">
+        {{ form.sender.errors }}
+        <label for="id_first_name">Име:</label>
+        {{ uform.first_name }}
+    </div>
+
+    <div class="fieldWrapper">
+        <label for="id_last_name">Презиме:</label>
+       {{ uform.last_name }}
+    </div>
+                </h3>
+
+                    <h4><input class="btn btn-warning" type="submit"
+                        name="submit" value="Създай потребител"/></h4>
+
+            </form>
+        </div>
+        </h5>
+    </body>
+</html>

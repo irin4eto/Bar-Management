@@ -16,9 +16,9 @@ class UserForm(forms.Form):
         attrs=dict(required=True, max_length=30, render_value=False)),
         label=_("Password (again)"))
     ROLE = (
-        ('M', 'MANAGER'),
-        ('W', 'WAITER'),
-        ('B', 'BARTENDER')
+        ('M', 'Управител'),
+        ('W', 'Сервитьор'),
+        ('B', 'Барман')
     )
     role = forms.ChoiceField(required=True, choices=ROLE)
     first_name = forms.CharField(required=True, max_length=30,
@@ -77,9 +77,9 @@ class UserForm(forms.Form):
 
 class UserProfileForm(forms.Form):
     ROLE = (
-        ('M', 'MANAGER'),
-        ('W', 'WAITER'),
-        ('B', 'BARTENDER')
+        ('M', 'Управител'),
+        ('W', 'Сервитьор'),
+        ('B', 'Барман')
     )
     role = forms.ChoiceField(required=True, choices=ROLE)
     """first_name = forms.CharField(required=True, max_length=30,
@@ -106,3 +106,5 @@ class LoginForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput(
         attrs=dict(required=True, max_length=30, render_value=False)),
         label=_("Password"))
+    email = forms.EmailField(widget=forms.TextInput(attrs=dict(
+                             max_length=30)), label=_("Email address"))

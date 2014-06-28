@@ -1,0 +1,45 @@
+
+{% load staticfiles %}
+
+{% load render_table from django_tables2 %}
+<!doctype html>
+<html>
+    <head>
+        <link rel="stylesheet" href="{{ STATIC_URL }}django_tables2/themes/paleblue/css/screen.css" />
+        <link href="{% static 'bootstrap/css/bootstrap.min.css' %}"
+        rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/login_form.css" />
+        <style>
+        .btn{
+              position:
+              fixed;
+              top:210px;
+              left:220px;
+           }
+        </style>
+
+        <style>
+        body {
+          font-family: 'Montserrat', sans-serif;
+          background-image:url("{{ STATIC_URL }}/img/rsz_1bartender.png");
+          background-repeat:no-repeat;
+          background-position: 198px -40px;
+          margin-right:-200px;
+          padding-right: 250px;
+         }
+    </style>
+    </head>
+    <body>
+        <form action="/waiters/" method="post">
+        {% csrf_token %}
+        <div style="background-color: #CCFF33; color:#990099; border:1px solid black; max-height: 400px; margin-top:100px; margin-left: 50px;
+            max-width: 600px; overflow: auto;">
+           {% render_table table %}
+            <input type="submit" name="submit"
+                           class="btn btn-success btn-lg" value="Make order"
+                           style="width:110px;height:60px;
+                           margin-top:320px; margin-left:68px"/>
+        </div>
+       </form>
+    </body>
+</html>
